@@ -30,7 +30,7 @@ def start(update, context):
                 ID int PRIMARY KEY auto_increment not null,
                 Nombre varchar(60) not null,
                 FechaNac date not null
-                ) Engine = InnoDB;""".format({first_name+str(user_id)})
+                ) Engine = InnoDB;""".format(first_name+str(user_id))
             cursor.execute(crearTabla)
     except Error as ex:
         print('Error en la conexion:', ex)
@@ -93,7 +93,7 @@ def month(update, context):
             cursor.execute(consultaMes)
             resultados = cursor.fetchall()
             for fecha in resultados:
-                # print(fecha[1], fecha[2])
+                # print(fecha[0], fecha[1])
                 context.bot.sendMessage(
                     chat_id = user_id,
                     parse_mode = "HTML",
