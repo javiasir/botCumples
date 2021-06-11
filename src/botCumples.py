@@ -92,12 +92,12 @@ def month(update, context):
             consultaMes = "SELECT Nombre, FechaNac FROM {0} WHERE MONTH(FechaNac)={1}".format(first_name+str(user_id), mes)
             cursor.execute(consultaMes)
             resultados = cursor.fetchall()
-            for fecha in resultados:
+            for fila in resultados:
                 # print(fecha[0], fecha[1])
                 context.bot.sendMessage(
                     chat_id = user_id,
                     parse_mode = "HTML",
-                    text =f"{fecha[0], fecha[1]}"
+                    text =f"{fila[0], str(fila[1])}"
                 )
     except Error as ex:
         print('Error en la conexion:', ex)
@@ -110,8 +110,9 @@ def help(update, context):
     logger.info('El usuario ha pedido ayuda')
     update.message.reply_text("""
     /start - Saludo del Bot
-    /añadirCumple arg1 arg - Introduce un cumpleaños. Arg1 es el nombre/mote de la persona (obligatorio) y Arg2(obligatorio) la fecha de nacimiento/fecha de cumpleaños(YYYY-MM-DD).
-    /esteMes arg1 - Busca los cumpleaños del mes introducido en el arg1 con el formato MM.
+    /addcumple arg1 arg2 - Introduce un cumpleaños. Arg1 es el nombre/mote de la persona (obligatorio) y Arg2(obligatorio) la fecha de nacimiento/fecha de cumpleaños(YYYY-MM-DD).
+    /mes arg1 - Busca los cumpleaños del mes introducido en el arg1 con el formato MM(numérico).
+    /help - Indica el funcionamiento de los comandos.
     """)
     
 
